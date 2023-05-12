@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  dev:
+      #Documentação da imagem:
+      #https://dockerfile.readthedocs.io/en/latest/content/DockerImages/dockerfiles/php-apache-dev.html
+      image: webdevops/php-apache-dev:7.4
+      volumes:
+          - ".:/app:consistent"
+          - "./docker/php.ini:/usr/local/etc/php/php.ini"
+          - "./docker/custom-dev.conf:/opt/docker/etc/httpd/conf.d/11-dev.conf"
+      ports:
+          - "8095:80"
+      environment:
+        DEBUG: 1
+        docker: true
+        XDEBUG_MODE: "develop,coverage"
+        PHP_DISPLAY_ERRORS: 1
+        WEB_DOCUMENT_ROOT: "/app/webroot"
+      restart: always
