@@ -1,6 +1,7 @@
 <?php
 
 use Cake\Cache\Engine\FileEngine;
+use Cake\Database\Driver\Sqlite;
 use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
@@ -257,7 +258,13 @@ return [
      *   other RDBMS.
      */
     'Datasources' => [
-
+        'default' => [
+            'driver' => Sqlite::class
+        ],
+        'test' => [
+            'driver' => Sqlite::class,
+            'database' => 'myapp_test.db'
+        ],
     ],
 
     /*
